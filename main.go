@@ -19,6 +19,10 @@ func Serve(ip string, port int, commmands map[string]CommandFunc) {
 
 func serverApiCreate(commands map[string]CommandFunc) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != "POST" {
+			writeResponseString(w, http.StatusMethodNotAllowed, "NOT ALLOWED")
+			return
+		}
 		w.WriteHeader(http.StatusOK)
 
 		cmd, err := readCommandDTO(r.Body)
