@@ -17,16 +17,8 @@ func (r *ResponseDTO) JSON() string {
 	return toJson(r)
 }
 
-type Auth struct {
-	AuthString string
-}
-
-func NewAuth(code string) *Auth {
-	return &Auth{code}
-}
-
-func (a *Auth) Command(name string, args []string) *CommandDTO {
-	return NewCommand(a.AuthString, name, args)
+func (c *CommandDTO) JSON() string {
+	return toJson(c)
 }
 
 func NewCommand(auth string, name string, args []string) *CommandDTO {

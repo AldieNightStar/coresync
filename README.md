@@ -106,3 +106,16 @@ cl := NewRawClient(rawCallBack)
 // Do request to the API
 code, message := cl.DoRequest("abc", []string{"A", "B"})
 ```
+
+# Utils
+* You can also send arrays in arguments or in return message
+* Just use functions `StringToArray` and `ArrayToString`
+```go
+// Convert string with "Text|Separated|by|Thumbs"
+// Also escape symbol `\` works to escape `|` symbol
+arr := StringToArray("a|b|c")
+
+// Converts array back to string
+// Adds escape symbols in case of "|"
+s := ArrayToString(arr)
+```

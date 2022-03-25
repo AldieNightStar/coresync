@@ -16,13 +16,12 @@ type Client struct {
 func NewHttpClient(addr string) *Client {
 	return &Client{
 		sendFunc: func(command *CommandDTO) *ResponseDTO {
-			sb := strings.Builder{}
-			err := json.NewEncoder(&sb).Encode(command)
-			if err != nil {
+			commandJson := command.JSON()
+			if commandJson == "" {
 				return NewResponse(ResponseStatusUnknownError, "Can't convert command to JSON")
 			}
 			// Do reqest
-			servResponse, err := http.Post(addr, "application/json", strings.NewReader(sb.String()))
+			servResponse, err := http.Post(addr, "application/json", strings.NewReader(commandJson))
 			if err != nil {
 				return NewResponse(ResponseStatusUnknownError, "Something wrong with response")
 			}
