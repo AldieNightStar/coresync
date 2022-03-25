@@ -97,7 +97,7 @@ reg["login"] = func(auth string, args []string) (int, string) {
 cl := coresync.NewHttpClient("localhost:8080")
 
 // Create new TCP client
-cl := coresync.NewSocketClient("localhost:8080")
+cl := coresync.NewSocketClient("http://localhost:8080")
 
 // Create new RAW client
 rawCallBack := coresync.ServeRaw(reg)
