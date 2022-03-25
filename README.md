@@ -1,6 +1,8 @@
 # CoreSync - API helper
 
 ```go
+import "github.com/AldieNightStar/coresync"
+
 // Create Command registry
 reg := make(coresync.CommandRegistry)
 
