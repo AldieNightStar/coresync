@@ -45,7 +45,7 @@ c(&coresync.CommandDTO{"commandName", []string{"Arg1", "Arg2"}, "AUTH"})
 * How it should work?
     * Create for example `register` command which returns status: `coresync.ResponseStatusAuthSetup` and message with new `Auth` string
     * That status tells client to change current `Auth` string
-    * Then you can validate that `Auth` string any way you want. Be it loginc/password or hex token
+    * Then you can validate that `Auth` string any way you want. Be it login/password or hex token
 
 # Register / login sample
 ```go
