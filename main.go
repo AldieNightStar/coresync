@@ -47,7 +47,7 @@ func ServeSocket(ip string, port int, commands CommandRegistry) error {
 				cmd := &CommandDTO{}
 				err = json.NewDecoder(strings.NewReader(dataString)).Decode(cmd)
 				if err != nil {
-					fmt.Fprintln(sock, NewResult(ResponseStatusUnknownError, "Bad JSON").JSON())
+					fmt.Fprintln(sock, NewResponse(ResponseStatusUnknownError, "Bad JSON").JSON())
 					continue
 				}
 				resp := generalApi(commands, cmd)
@@ -85,8 +85,8 @@ func serveApiHttpCreate(commands CommandRegistry) func(http.ResponseWriter, *htt
 func generalApi(commands CommandRegistry, command *CommandDTO) *ResponseDTO {
 	fn, ok := commands[command.CommandName]
 	if !ok {
-		return NewResult(ResponseStatusNoSuchCommand, "No such command: "+command.CommandName)
+		return NewResponse(ResponseStatusNoSuchCommand, "No such command: "+command.CommandName)
 	}
 	status, message := fn(command.AuthString, command.Arguments)
-	return NewResult(status, message)
+	return NewResponse(status, message)
 }

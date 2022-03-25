@@ -14,6 +14,7 @@ func main() {
 	}
 	// coresync.ServeHttp("0.0.0.0", 8080, reg)
 	c := coresync.ServeRaw(reg)
+	coresync.ServeSocket()
 	resp := c(&coresync.CommandDTO{
 		CommandName: "abc",
 		Arguments:   []string{"Arg1", "Arg2"},

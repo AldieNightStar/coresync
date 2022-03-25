@@ -33,6 +33,6 @@ func NewCommand(auth string, name string, args []string) *CommandDTO {
 	return &CommandDTO{name, args, auth}
 }
 
-func NewResult(code int, message string) *ResponseDTO {
+func NewResponse(code int, message string) *ResponseDTO {
 	return &ResponseDTO{code, message}
 }
