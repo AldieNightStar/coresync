@@ -90,3 +90,19 @@ reg["login"] = func(auth string, args []string) (int, string) {
     }
 }
 ```
+
+# Client
+```go
+// Create new HTTP client
+cl := coresync.NewHttpClient("localhost:8080")
+
+// Create new TCP client
+cl := coresync.NewSocketClient("localhost:8080")
+
+// Create new RAW client
+rawCallBack := coresync.ServeRaw(reg)
+cl := NewRawClient(rawCallBack)
+
+// Do request to the API
+code, message := cl.DoRequest("abc", []string{"A", "B"})
+```

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/AldieNightStar/coresync"
 )
@@ -12,12 +13,11 @@ func main() {
 	reg["abc"] = func(auth string, args []string) (int, string) {
 		return len(args), strings.Join(args, "; ")
 	}
-	// coresync.ServeHttp("0.0.0.0", 8080, reg)
-	c := coresync.ServeRaw(reg)
-	resp := c(&coresync.CommandDTO{
-		CommandName: "abc",
-		Arguments:   []string{"Arg1", "Arg2"},
-		AuthString:  "",
-	})
-	fmt.Println(resp.ResultCode, resp.ResultMessage)
+	go func() {
+		time.Sleep(time.Second)
+		cl := coresync.NewHttpClient("http://localhost:8080")
+		code, message := cl.DoRequest("abc", []string{"A", "B"})
+		fmt.Println(code, message)
+	}()
+	coresync.ServeHttp("0.0.0.0", 8080, reg)
 }
